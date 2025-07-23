@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
-
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
+const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 
 export const registerUser = async ({
   email,
@@ -31,12 +30,7 @@ export const registerUser = async ({
     },
   });
 
-  return {
-    id: user.id,
-    email: user.email,
-    fullName: user.fullName,
-    role: user.role,
-  };
+  return { id: user.id, email: user.email, fullName: user.fullName, role: user.role };
 };
 
 export const loginUser = async ({
@@ -60,3 +54,4 @@ export const loginUser = async ({
 
   return token;
 };
+
