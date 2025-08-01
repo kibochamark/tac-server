@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  
 }
 
 datasource db {
@@ -17,11 +16,55 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
- 
+  eventsLogged Event[] @relation("EventLogger")
+}
+
+model Patient {
+  id          String    @id @default(uuid()) // Auto-generates ID
+  fullName    String
+  dateOfBirth DateTime?
+  gender      String?
+  phone       String?
+  email       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  events Event[]
 }
 
 enum Role {
   NURSE
   DOCTOR
   ADMIN
+}
+
+model Event {
+  id          String      @id @default(uuid())
+  patientId   String
+  loggerId    String
+  dateLogged  DateTime    @default(now())
+  type        String
+  severity    Severity
+  description String
+   imageUrl    String?      // <- new field
+  status      EventStatus @default(NEW)
+
+  // Relations
+  patient Patient @relation(fields: [patientId], references: [id])
+  logger  User    @relation("EventLogger", fields: [loggerId], references: [id])
+}
+
+enum Severity {
+  LOW
+  MODERATE
+  HIGH
+  CRITICAL
+}
+
+enum EventStatus {
+  NEW
+  UNDER_REVIEW
+  REQUIRES_FOLLOW_UP
+  APPOINTMENT_CREATED
+  RESOLVED
 }

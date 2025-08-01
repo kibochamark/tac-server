@@ -54,4 +54,24 @@ export const loginUser = async ({
 
   return token;
 };
+export const changeUserPassword = async (
+  userId: string,
+  currentPassword: string,
+  newPassword: string
+) => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) return null;
+
+  const valid = await bcrypt.compare(currentPassword, user.password);
+  if (!valid) return false;
+
+  const hashed = await bcrypt.hash(newPassword, 10);
+  await prisma.user.update({
+    where: { id: userId },
+    data: { password: hashed }
+  });
+
+  return true;
+};
+
 

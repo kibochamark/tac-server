@@ -1,0 +1,10 @@
+POST http://localhost:4000/api/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxYTFhNTFlNS1mMmMzLTQyN2MtODM3MC0xYTc4Mjg1NmJiZmUiLCJyb2xlIjoiTlVSU0UiLCJpYXQiOjE3NTM0MzEyMzgsImV4cCI6MTc1MzUxNzYzOH0.HqA5NifIGrvXCCM-LPGf0GPWBjX8YLaZtCrEKUJpd1A
+
+{
+  "patientId": "7a3117ac-9316-47ae-8934-83e42506b137",
+  "type": "Infection",
+  "severity": "CRITICAL",
+  "description": "Swelling observed on left arm access site."
+}

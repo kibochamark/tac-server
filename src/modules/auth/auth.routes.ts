@@ -1,11 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { register, login } from './auth.controller';
 import { authenticate } from './auth.middleware';
+import { changePassword } from './auth.controller';
 
 const router = Router();
 
 router.post('/register', register);
 router.post('/login', login);
+router.post('/change-password', authenticate, changePassword);
 
 // ✅ Protected route
 router.get('/profile', authenticate, (req: Request, res: Response) => {
