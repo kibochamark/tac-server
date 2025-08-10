@@ -1,0 +1,31 @@
+@base=http://localhost:5000
+@id=REPLACE_WITH_APPOINTMENT_ID
+
+### Health
+GET {{base}}/health
+
+### Create appointment
+POST {{base}}/api/v1/appointments
+Content-Type: application/json
+
+{
+  "patientId": "p1",
+  "patientName": "John Doe",
+  "doctorId": "d1",
+  "doctorName": "Dr. Sarah Wilson",
+  "startTime": "2025-07-25T10:00:00.000Z",
+  "endTime": "2025-07-25T10:30:00.000Z",
+  "reason": "Follow up"
+}
+
+### List
+GET {{base}}/api/v1/appointments?doctorId=d1
+
+### Get by id
+GET {{base}}/api/v1/appointments/{{id}}
+
+### Update status
+PATCH {{base}}/api/v1/appointments/{{id}}/status
+Content-Type: application/json
+
+{ "status": "Completed" }
