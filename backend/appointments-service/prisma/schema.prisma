@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  Scheduled
+  Completed
+  Cancelled
+  NoShow
+}
+
+model Appointment {
+  id          String   @id @default(uuid())
+  patientId   String
+  patientName String
+  doctorId    String
+  doctorName  String
+  department  String?
+  startTime   DateTime
+  endTime     DateTime
+  reason      String?
+  status      Status   @default(Scheduled)
+  notes       String?
+  createdBy   String?
+  updatedBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([doctorId, startTime])
+  @@unique([doctorId, startTime])
+}

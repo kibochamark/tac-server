@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Install and start appointments service",
+			"command": "bash.exe",
+			"args": [
+				"-lc",
+				"cd 'backend/appointments-service' && npm install && npm run dev"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			]
+		}
+	]
+}
